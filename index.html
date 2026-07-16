@@ -284,7 +284,27 @@
     border-radius: 50%;
     background: #eee;
   }
+
+  /* self-contained, single-file download — works fully offline once
+     saved (no server, no external assets) */
+  .download-link {
+    position: fixed;
+    top: 18px;
+    right: 20px;
+    font-size: 12px;
+    color: #777;
+    text-decoration: none;
+    padding: 6px 12px;
+    border: 1px solid #333;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .download-link:hover { color: #eee; border-color: #555; }
 </style>
+<a class="download-link" id="downloadLink" download="finalytics-logo-animations.html">&#8595; Download</a>
+
 <div class="content">
   <div class="stage" id="stage" data-direction="up"></div>
 </div>
@@ -964,6 +984,17 @@
     loopEnabled = e.target.checked;
     applyLoopState();
   });
+
+  // Builds a standalone copy of the page exactly as it currently sits in
+  // the DOM (all logos already inlined as data URIs, so it's fully
+  // self-contained) and points the download link at it. Works whether
+  // this page is being viewed on GitHub Pages or after being downloaded
+  // and reopened locally via file://.
+  const downloadBlob = new Blob(
+    ['<!DOCTYPE html>\n' + document.documentElement.outerHTML],
+    { type: 'text/html' }
+  );
+  document.getElementById('downloadLink').href = URL.createObjectURL(downloadBlob);
 
   selectLogo(activeKey);
 </script>
