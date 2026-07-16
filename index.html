@@ -296,7 +296,7 @@
   </div>
   <!-- one dot per animation style in STYLES; click to preview that style -->
   <div class="dots" id="dots"></div>
-  <label class="loop-toggle"><input type="checkbox" id="loopToggle" /> Loop</label>
+  <label class="loop-toggle"><input type="checkbox" id="loopToggle" checked /> Loop</label>
 </div>
 
 <div class="dock" id="dock"></div>
@@ -814,7 +814,7 @@
     return 280 + SAT_DUR_MS;
   }
 
-  let loopEnabled = false;
+  let loopEnabled = true;
 
   /* One-shot build-in only — used for a plain (non-loop) reveal. */
   function playReveal() {
